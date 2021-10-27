@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meme Generator</title>
+</head>
+
+<body onload="onInit()">
+    <header class="main-header flex space-between align-center">
+        <div class="header-container header-layout flex space-between align-center">
+            <div class="logo">Gallery</div>
+            <section class="main-nav">
+                <button onclick="openGallery()">Gallery</button>
+                <button>About</button>
+            </section>
+            <!-- <button class="btn-menu" onclick="toggleMenu()">☰</button> -->
+        </div>
+    </header>
+
+    <main class="main-layout">
+        <div class="grid-container"></div>
+    </main>
+    <div class="meme-generator-container  flex space-between align-center">
+        <header class="header-2 main-header flex space-between align-center">
+            <div class="header-container header-layout flex space-between align-center">
+                <div class="logo">Gallery</div>
+                <section class="main-nav">
+                    <button onclick="openGallery()">Gallery</button>
+                    <button>About</button>
+                </section>
+                <!-- <button class="btn-menu" onclick="toggleMenu()">☰</button> -->
+            </div>
+        </header>
+        <div class="main-content flex main-layout">
+
+            <section class="canvas-container">
+                <canvas width="650" height="650" id="canvas"></canvas>
+            </section>
+            <section class="meme-editor flex direction-column  align-center">
+                <input type="text" placeholder="enter text here">
+                <section class="update-buttons flex ">
+                    <button>🔃</button>
+                    <button>➕</button>
+                    <button>❌</button>
+                </section>
+            </section>
+        </div>
+
+    </div>
+
+    <script src="js/canvas.js"></script>
+    <script src="js/gallery-service.js"></script>
+    <script src="js/meme-service.js"></script>
+    <script src="js/gallery-controller.js"></script>
+
+</body>
+
+</html>
