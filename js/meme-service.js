@@ -1,10 +1,12 @@
 var gMeme;
 
+// DATA AREA
+
 function createGMeme(id, txt) {
   gMeme = {
     selectedImgId: id,
     selectedLineIdx: 0,
-    newLinePos: { x: 200, y: 300 },
+    newLinePos: { x: 100, y: 400 },
     url: gImgs[id - 1],
     objects: [
       {
@@ -29,6 +31,8 @@ function createGMeme(id, txt) {
   console.log(gMeme);
 }
 
+// LINE AREA
+
 function setSelectedLine(idx) {
   if (!idx) {
     if (gMeme.selectedLineIdx === gMeme.objects.length - 1) {
@@ -40,24 +44,11 @@ function setSelectedLine(idx) {
   gMeme.selectedLineIdx = idx;
 }
 
-function getimgById(imgId) {
-  var image = gImgs.find(img => {
-    return +imgId === img.id;
-  });
-  return image;
-}
-
-function downloadImg(elLink) {
-  console.log(elLink, gElCanvas);
-  var imgContent = gElCanvas.toDataURL("image/jpeg");
-  elLink.href = imgContent;
-}
-
 function addNewLine() {
   gMeme.objects.push({
     txt: "NEW LINE",
     type: "text",
-    size: 20,
+    size: 40,
     align: "left",
     color: "white",
     strokeClr: "black",
@@ -72,8 +63,42 @@ function setNewLinePos() {
   } else if (gMeme.newLinePos.y > 450) {
     gMeme.newLinePos.y = 10;
   }
-  gMeme.newLinePos.x += 30;
+  gMeme.newLinePos.x += 100;
   gMeme.newLinePos.y += 10;
+}
+function moveLinesUp() {
+  gMeme.objects[gMeme.selectedLineIdx].y =
+    gMeme.objects[gMeme.selectedLineIdx].y - 10;
+}
+function moveLineDown() {
+  gMeme.objects[gMeme.selectedLineIdx].y =
+    gMeme.objects[gMeme.selectedLineIdx].y + 10;
+}
+
+function tocenterLine() {
+  gMeme.objects[gMeme.selectedLineIdx].x = 150;
+  onUpdateCanvas();
+}
+function toLeftLine() {
+  gMeme.objects[gMeme.selectedLineIdx].x = 50;
+  onUpdateCanvas();
+}
+function toRightLine() {
+  gMeme.objects[gMeme.selectedLineIdx].x = 300;
+  onUpdateCanvas();
+}
+
+function getimgById(imgId) {
+  var image = gImgs.find(img => {
+    return +imgId === img.id;
+  });
+  return image;
+}
+
+function downloadImg(elLink) {
+  console.log(elLink, gElCanvas);
+  var imgContent = gElCanvas.toDataURL("image/jpeg");
+  elLink.href = imgContent;
 }
 
 function setCurrText(txt) {
@@ -94,9 +119,16 @@ function findObjRange(x, y) {
       closestPos = distance;
     }
   });
-  console.log(closestPos);
   if (closestPos > 7) return;
   gMeme.selectedLineIdx = closestIdx;
+}
+
+function setStrokeColor(color) {
+  gMeme.objects[gMeme.selectedLineIdx].strokeClr = color;
+}
+
+function setTextColor(color) {
+  gMeme.objects[gMeme.selectedLineIdx].color = color;
 }
 
 // function onImgInput(ev) {

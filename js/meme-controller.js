@@ -22,11 +22,13 @@ function onDrawObjects() {
     });
   }, 0);
 }
+
 function onSetCurrMeme(id) {
   createGMeme(id, "changeme");
   onUpdateUi();
   onUpdateCanvas();
 }
+
 function updateInputValue() {
   var elInput = document.querySelector("#text-input");
   if (!gMeme.objects[gMeme.selectedLineIdx].txt) {
@@ -34,6 +36,31 @@ function updateInputValue() {
   } else {
     elInput.value = gMeme.objects[gMeme.selectedLineIdx].txt;
   }
+}
+
+function setLinesPos(elBtn) {
+  switch (elBtn.id) {
+    case "right":
+      toRightLine();
+      break;
+    case "center":
+      tocenterLine();
+      break;
+    case "left":
+      toLeftLine();
+      break;
+    default:
+  }
+}
+
+function onMoveLineUp() {
+  moveLinesUp();
+  onUpdateCanvas();
+}
+
+function onMoveLineDown() {
+  moveLineDown();
+  onUpdateCanvas();
 }
 
 function onNewLine() {
@@ -48,6 +75,7 @@ function onChooseNxtLine() {
 }
 
 function onSelectLine() {
+  console.log("hey");
   setSelectedLine(idx);
 }
 
@@ -58,6 +86,13 @@ function onSetSize(size) {
 function updateTextSizeValue() {
   var elInput = document.querySelector("#text-size");
   elInput.value = gMeme.objects[gMeme.selectedLineIdx].size;
+}
+
+function onDeletLine() {
+  var elInput = document.querySelector("#text-input");
+  elInput.value = "";
+  gMeme.objects[gMeme.selectedLineIdx].txt = "";
+  onUpdateCanvas();
 }
 
 function onUpdateUi() {
@@ -73,8 +108,18 @@ function onSelectObj(ev) {
   onUpdateUi();
 }
 
-function onSwitchLines() {}
-function onEditText(params) {}
-function onDeletLine() {}
-function setStrokeColor(params) {}
+function onSetStrokeClr(color) {
+  setStrokeColor(color);
+  onUpdateCanvas();
+}
+
+function onSetTextColor(color) {
+  setTextColor(color);
+  onUpdateCanvas();
+}
+function onSetFont(font) {
+  setFont(font);
+  onUpdateCanvas();
+}
+
 function onAddSticker(params) {}

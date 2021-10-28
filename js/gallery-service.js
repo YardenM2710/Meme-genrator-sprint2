@@ -11,10 +11,10 @@ function createImgs() {
   createImg(5, "img/5.jpg");
   createImg(6, "img/6.jpg");
   createImg(7, "img/7.jpg");
-  createImg(2, "img/8.jpg");
-  createImg(1, "img/9.jpg");
-  createImg(1, "img/10.jpg");
-  createImg(2, "img/11.jpg");
+  createImg(8, "img/8.jpg");
+  createImg(9, "img/9.jpg");
+  createImg(10, "img/10.jpg");
+  createImg(11, "img/11.jpg");
 }
 
 function createImg(id, url) {

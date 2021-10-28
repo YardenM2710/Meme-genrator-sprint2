@@ -15,6 +15,7 @@
             <div class="logo">Gallery</div>
             <section class="main-nav">
                 <button onclick="openGallery()">Gallery</button>
+                <button>My Memes</button>
                 <button>About</button>
             </section>
             <!-- <button class="btn-menu" onclick="toggleMenu()">☰</button> -->
@@ -30,6 +31,7 @@
                 <div class="logo">Gallery</div>
                 <section class="main-nav">
                     <button onclick="openGallery()">Gallery</button>
+                    <button>My Memes</button>
                     <button>About</button>
                 </section>
                 <!-- <button class="btn-menu" onclick="toggleMenu()">☰</button> -->
@@ -42,17 +44,43 @@
 
                 </canvas>
             </section>
-            <section class="meme-editor flex direction-column  align-center">
+            <section class="meme-editor flex direction-column direction-column  align-center">
                 <input id="text-input" oninput="onDrawText(event,this)" type="text" placeholder="enter text here">
+                <div class="manage-btns">
+                    <button onclick="onMoveLineUp()" class="move-line-up"> <img src="img\up-arrow.png"></button>
+                    <button onclick="onMoveLineDown()" class="move-line-down"><img src="img\down-arrow.png"></button>
+                    <button class="change-line-btn" onclick="onChooseNxtLine()"><img src="img\arrow.png"></button>
+                    <button class="add-btn" onclick="onNewLine()"><img src="img\plus.png"></button>
+                    <button class="delete-btn" onclick="onDeletLine()"><img src="img\delete.png"></button>
+                </div>
+                <div class="editors">
+                    <button onclick="setLinesPos(this)" id="left" class="item-1"><img src="img\left.png"></button>
+                    <button onclick="setLinesPos(this)" id="center" class="item-2"><img src="img\center.png"></button>
+                    <button onclick="setLinesPos(this)" id="right" class="item-3"><img src="img\right.png"></button>
+                    <button type="color" class="item-4"><img src="img\color.png"></button>
+                    <button class="item-5"><img src="img\S.png"></button>
+                    <input oninput="onSetStrokeClr(this.value)" type="color" id="favcolor" name="favcolor"
+                        value="#ff0000">
+                    <input oninput="onSetTextColor(this.value)" type="color" value="#ff0000">
+                    <input class="item-6" id="text-size" onchange="onSetSize(this.value)" min="0" max="50"
+                        type="number">
+                    <select onchange="onSetFont(this.value)" class="font-input item-7">
+                        <option>Impact</option>
+                        <option>Cursive</option>
+                        <option>Arial</option>
+                    </select>
 
-                <section class="update-buttons flex ">
-                    <button onclick="onChooseNxtLine()">🔃</button>
-                    <button onclick="onNewLine()">➕</button>
-                    <button onclick="clearCanvas()">❌</button>
-                    <input id="text-size" onchange="onSetSize(this.value)" min="0" max="50" type="number">
-                </section>
-                <a href="#" class="btn" onclick="downloadImg(this)" download="my-img.jpg">Download Img</a>
-                <a href="#" onclick="uploadImg()">Upload Img</a>
+
+                </div>
+                <div class="download-upload flex  clean-list">
+                    <div class="download-btn flex align-center">
+                        <a href="#" onclick="downloadImg(this)" style="text-decoration:none"
+                            download="my-img.jpg">Download Img</a>
+                    </div>
+                    <div class="upload-btn align-center flex">
+                        <a href="#" style="text-decoration:none" onclick="uploadImg()">Upload Img</a>
+                    </div>
+                </div>
             </section>
         </div>
 

@@ -3,6 +3,11 @@ function onInit() {
   setCanvas();
 }
 
+function openGallery() {
+  document.querySelector(".meme-generator-container").style.visibility =
+    "hidden";
+}
+
 function renderGallery(imgs) {
   let strHtml = "";
   imgs.forEach(img => {

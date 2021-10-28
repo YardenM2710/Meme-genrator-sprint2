@@ -1,8 +1,9 @@
 var gElCanvas;
 var gCtx;
 var gPos;
+var gFont = "IMPACT";
 
-function setCanvas(url) {
+function setCanvas() {
   gElCanvas = document.getElementById("canvas");
   gCtx = gElCanvas.getContext("2d");
 }
@@ -10,10 +11,16 @@ function setCanvas(url) {
 function drawText(text, isSelected) {
   gCtx.strokeStyle = text.strokeClr;
   gCtx.fillStyle = text.color;
-  gCtx.font = text.size + "px IMPACT";
+  gCtx.font = text.size + `px ${gFont}`;
   gCtx.fillText(text.txt, text.x, text.y);
   gCtx.strokeText(text.txt, text.x, text.y);
   if (isSelected) drawRect(text.x, text.y);
+}
+
+
+
+function setFont(font) {
+  gFont = font;
 }
 
 function getPos(ev) {
@@ -34,7 +41,7 @@ function drawBaseImg(url) {
 
 function drawRect(x, y) {
   gCtx.beginPath();
-  gCtx.rect(x - 20, y - 20, 200, 50);
+  gCtx.rect(x - 10, y - 40, 200, 50);
   gCtx.strokeStyle = "white";
   gCtx.stroke();
 }
