@@ -14,30 +14,38 @@
         <div class="header-container header-layout flex space-between align-center">
             <div class="logo">Gallery</div>
             <section class="main-nav">
-                <button onclick="openGallery()">Gallery</button>
-                <button>My Memes</button>
-                <button>About</button>
+                <a href="#" onclick="openGallery()" style="text-decoration:none">Gallery</a>
+                <a href="#" style="text-decoration:none">My Memes</a>
+                <a href="#" style="text-decoration:none">About</a>
             </section>
             <!-- <button class="btn-menu" onclick="toggleMenu()">☰</button> -->
         </div>
     </header>
 
+    <section class="search-container flex align-center">
+        <input class="search-input" placeholder="search" type="search">
+        <div class="sort flex ">
+
+        </div>
+        <button class="more-btn">More</button>
+    </section>
+
     <main class="main-layout">
-        <div class="grid-container"></div>
+        <div class="grid-container "></div>
     </main>
-    <div class="meme-generator-container  flex space-between align-center">
+    <div class="meme-generator-container flex space-between align-center">
         <header class="header-2 main-header flex space-between align-center">
             <div class="header-container header-layout flex space-between align-center">
-                <div class="logo">Gallery</div>
+                <div class="logo">Meme Generator</div>
                 <section class="main-nav">
-                    <button onclick="openGallery()">Gallery</button>
-                    <button>My Memes</button>
-                    <button>About</button>
+                    <a href="#" style="text-decoration:none" onclick="openGallery()">Gallery</a>
+                    <a href="#" style="text-decoration:none">My Memes</a>
+                    <a href="#" style="text-decoration:none">About</a>
                 </section>
                 <!-- <button class="btn-menu" onclick="toggleMenu()">☰</button> -->
             </div>
         </header>
-        <div class="main-content flex main-layout">
+        <div class="main-meme-editor main-content flex main-layout">
 
             <section class="canvas-container">
                 <canvas onclick="onSelectObj(event)" width="500" height="500" id="canvas">
@@ -62,7 +70,7 @@
                     <input oninput="onSetStrokeClr(this.value)" type="color" id="favcolor" name="favcolor"
                         value="#ff0000">
                     <input oninput="onSetTextColor(this.value)" type="color" value="#ff0000">
-                    <input class="item-6" id="text-size" onchange="onSetSize(this.value)" min="0" max="50"
+                    <input class="item-6" id="text-size" onchange="onSetSize(this.value)" min="0" max="100"
                         type="number">
                     <select onchange="onSetFont(this.value)" class="font-input item-7">
                         <option>Impact</option>
@@ -71,6 +79,10 @@
                     </select>
 
 
+                </div>
+                <div class="stickers-container flex">
+                    <input onclick="onAddSticker(this)" type="image" id="img\cigarrete.png" src="img\cigarrete.png">
+                    <input onclick="onAddSticker(this)" type="image" id="img\sun-glasses.png" src="img\sun-glasses.png">
                 </div>
                 <div class="download-upload flex  clean-list">
                     <div class="download-btn flex align-center">
@@ -86,6 +98,7 @@
 
     </div>
 
+    <script src="js/util.js"></script>
     <script src="js/gallery-service.js"></script>
     <script src="js/meme-service.js"></script>
     <script src="js/meme-controller.js"></script>

@@ -9,18 +9,20 @@ body{
 
 .main-layout{
    max-width: 1200px;
-   height: 100vh;
    margin: 0 auto;
 }
 
 /* HEADER */
 .main-header {
-    height: 110px;
-    background-color: #292929;
+    top: 5px;
+    height: 80px;
+    width: 100%;
+    border-radius: 40px;
+    background: linear-gradient(to right,  #0F9BB2 0%,#1FAB93 50%,#1FAB93  50%,#29B480 100%);
     color: white;
-    box-shadow: 0px 4px 0px black;
 
 }
+
 .header-layout{
     max-width: 1100px;
     margin: 0 auto;
@@ -31,15 +33,17 @@ body{
 }
 
 .logo{
-    font-size: 1.875rem;
+    font-size: 27px;
+    font-family:Arial, Helvetica, sans-serif;
     text-align: center;
 }
 /* NAVBAR */
 
-.main-nav button {
+.main-nav a {
+    font-family:Arial, Helvetica, sans-serif;
     font-size: 20px;
-    background-color: gainsboro;
     margin-left: 20px;
+    color: gainsboro;
 }
 
 /* HELPERS */
@@ -67,6 +71,43 @@ body{
     list-style-type: none;
 }
 
+/* SEARCH */
+.search-container{
+    justify-content: center;
+    gap: 40px;
+}
+.sort{
+    width: 30%;
+    justify-content: space-between;
+}
+.sort h3{
+    position: relative;
+    font-size: 1.8rem;
+    font-family: Arial, Helvetica, sans-serif;
+ color: white;
+
+}
+.more-btn{
+    background: linear-gradient(to right,  #0F9BB2 0%,#1FAB93 50%,#1FAB93  50%,#29B480 100%);
+    font-size: 1.8em;
+    border-radius: 20px;
+    color: white;
+    height: 50px;
+    width: 100px;
+    cursor: pointer;
+    
+    
+
+}
+
+.search-input{
+    color: linear-gradient(to right,  #0F9BB2 0%,#1FAB93 50%,#1FAB93  50%,#29B480 100%);
+    list-style: none;
+    font-size: 30px;
+    border-radius: 20px;
+    
+}
+
 
 /* GRID GALLERY */
 
@@ -75,6 +116,7 @@ img{
 }
 
 .grid-container{
+    margin-top: 50px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
     gap: 20px;
@@ -84,20 +126,21 @@ img{
 /* MEME GENERATOR */
 .header-2{
     position: absolute;
-    top: 0;
+    top: 5px;
     width: 100%;
 }
 
 .meme-generator-container{
-    visibility:visible;
+    overflow: hidden;
+    visibility:hidden;
     position:absolute;
     top: 0;
     left: 0;
     height: 100vh;
     width: 100%;
-    background-color: #000000;
-}
+    background-color: black
 
+}
 
 .main-content{
     align-items: center;
@@ -106,11 +149,17 @@ img{
 
 /* MEME EDITOR */
 
+#canvas{
+    border-radius: 20px;
+}
+
+  
 .meme-editor{
     background-color: #22252C;
+    border-radius: 20px;
     justify-content: space-between;
-    height: 550px;
-    width: 520px;
+    height: 500px;
+    width: 500px;
 }
 button{
     cursor: pointer;
@@ -169,13 +218,11 @@ button{
 
  .editors button{
   border-radius: 20px;
-  display: inline-block;
   padding: 0.35em 1.2em;
   border: 1px solid #000000;
   margin: 0 0.3em 0.3em 0;
-  box-sizing: border-box;
   text-decoration: none;
-  font-family: "Roboto", sans-serif;
+  height: 40px;
   color: #fcfcfc;
   text-align: center;
   transition: all 0.2s;
@@ -217,8 +264,7 @@ button{
        grid-template-rows:repeat(2,60px) ;
        background-color: #1EAA95;
        border-radius: 20px;
-       gap: 15px;
-       
+       gap: 8px;
 }
 
 .item-1{
@@ -255,6 +301,15 @@ button{
     height: 40%;
     grid-column:3 / 4;
     grid-row:2;
+}
+
+/* STICKERS */
+.stickers-container{
+    width: 50%;
+    background-color: gainsboro;
+    border-radius: 20px;
+    gap: 20px;
+    justify-content: center;
 }
 
 

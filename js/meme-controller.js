@@ -1,10 +1,11 @@
-function onDrawText(ev) {
+function onDrawText() {
   var txt = document.querySelector("#text-input").value;
   setCurrText(txt);
   onUpdateCanvas();
 }
 
 function onUpdateCanvas() {
+  console.log(gMeme);
   drawBaseImg(gMeme.url.url);
   onDrawObjects();
 }
@@ -16,15 +17,18 @@ function onDrawObjects() {
       if (obj.type === "text") {
         if (idx === gMeme.selectedLineIdx) isSelected = true;
         drawText(obj, isSelected);
-      } else {
-        console.log("RENDERING STICKER ON CANVAS");
+      }
+      if (obj.type === "img") {
+        if (idx === gMeme.selectedLineIdx) isSelected = true;
+        drawSticker(obj, isSelected);
       }
     });
   }, 0);
 }
 
 function onSetCurrMeme(id) {
-  createGMeme(id, "changeme");
+  console.log("id:", id);
+  createGMeme(id, "Enter Text Here");
   onUpdateUi();
   onUpdateCanvas();
 }
@@ -92,6 +96,7 @@ function onDeletLine() {
   var elInput = document.querySelector("#text-input");
   elInput.value = "";
   gMeme.objects[gMeme.selectedLineIdx].txt = "";
+  // gMeme.objects.splice(gMeme.selectedLineIdx, 1);
   onUpdateCanvas();
 }
 
@@ -101,6 +106,7 @@ function onUpdateUi() {
 }
 
 function onSelectObj(ev) {
+  console.log(gMeme.objects[gMeme.selectedLineIdx]);
   let offsetX = ev.offsetX;
   let offsetY = ev.offsetY;
   findObjRange(offsetX, offsetY);
@@ -122,4 +128,9 @@ function onSetFont(font) {
   onUpdateCanvas();
 }
 
-function onAddSticker(params) {}
+function onAddSticker(elSticker) {
+  let src = elSticker.id;
+  addNewSticker(src);
+  console.log(gMeme);
+  onUpdateCanvas();
+}

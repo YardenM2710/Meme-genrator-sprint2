@@ -19,13 +19,13 @@ function createGMeme(id, txt) {
         x: 100,
         y: 100,
       },
-      //   {
-      //     type: "img",
-      //     size: 20,
-      //     src: "123",
-      //     x: 100,
-      //     y: 200,
-      //   },
+      {
+        type: "img",
+        size: 20,
+        src: ``,
+        x: 100,
+        y: 200,
+      },
     ],
   };
   console.log(gMeme);
@@ -52,6 +52,16 @@ function addNewLine() {
     align: "left",
     color: "white",
     strokeClr: "black",
+    x: gMeme.newLinePos.x,
+    y: gMeme.newLinePos.y,
+  });
+  setNewLinePos();
+}
+function addNewSticker(src) {
+  gMeme.objects.push({
+    type: "img",
+    size: 20,
+    src,
     x: gMeme.newLinePos.x,
     y: gMeme.newLinePos.y,
   });
@@ -104,6 +114,10 @@ function downloadImg(elLink) {
 function setCurrText(txt) {
   gMeme.objects[gMeme.selectedLineIdx].txt = txt;
 }
+function setCurrSticker(img) {
+  gMeme.objects[gMeme.selectedLineIdx].txt = txt;
+}
+
 function setCurrTextSize(size) {
   gMeme.objects[gMeme.selectedLineIdx].size = size;
 }
@@ -121,6 +135,10 @@ function findObjRange(x, y) {
   });
   if (closestPos > 7) return;
   gMeme.selectedLineIdx = closestIdx;
+}
+
+function setNewSticker(src) {
+  gMeme.objects[gMeme.selectedLineIdx].src = src;
 }
 
 function setStrokeColor(color) {

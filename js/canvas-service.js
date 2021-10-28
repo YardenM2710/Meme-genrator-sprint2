@@ -17,7 +17,16 @@ function drawText(text, isSelected) {
   if (isSelected) drawRect(text.x, text.y);
 }
 
-
+function drawSticker(object, isSelected) {
+  let size = document.querySelector("#text-size").value;
+  let url = object.src;
+  let sticker = new Image();
+  sticker.src = url;
+  sticker.onload = function () {
+    gCtx.drawImage(sticker, 100, 190, size, size);
+  };
+  if (isSelected) drawRect(object.x - 70, object.y + 20);
+}
 
 function setFont(font) {
   gFont = font;
@@ -32,6 +41,7 @@ function getPos(ev) {
 }
 
 function drawBaseImg(url) {
+  console.log(url);
   let base_image = new Image();
   base_image.src = url;
   base_image.onload = function () {
@@ -41,7 +51,7 @@ function drawBaseImg(url) {
 
 function drawRect(x, y) {
   gCtx.beginPath();
-  gCtx.rect(x - 10, y - 40, 200, 50);
+  gCtx.rect(x - 10, y - 40, 280, 50);
   gCtx.strokeStyle = "white";
   gCtx.stroke();
 }
