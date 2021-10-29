@@ -1,4 +1,6 @@
 var gMeme;
+const KEY = "my-memes";
+var gMyMemes = loadFromStorage(KEY) || [];
 
 // DATA AREA
 
@@ -8,6 +10,7 @@ function createGMeme(id, txt) {
     selectedLineIdx: 0,
     newLinePos: { x: 100, y: 400 },
     url: gImgs[id - 1],
+    isDrag: false,
     objects: [
       {
         type: "text",
@@ -19,16 +22,14 @@ function createGMeme(id, txt) {
         x: 100,
         y: 100,
       },
-      {
-        type: "img",
-        size: 20,
-        src: ``,
-        x: 100,
-        y: 200,
-      },
     ],
   };
-  console.log(gMeme);
+}
+
+function saveMeme() {
+  gMeme.prevImg = getImgUrl();
+  gMyMemes.unshift(gMeme);
+  _saveMemesToStorage();
 }
 
 // LINE AREA
@@ -60,13 +61,19 @@ function addNewLine() {
 function addNewSticker(src) {
   gMeme.objects.push({
     type: "img",
-    size: 20,
+    size: 30,
     src,
     x: gMeme.newLinePos.x,
     y: gMeme.newLinePos.y,
   });
   setNewLinePos();
 }
+
+function setObjPos(x, y) {
+  gMeme.objects[gMeme.selectedLineIdx].y = y;
+  gMeme.objects[gMeme.selectedLineIdx].x = x;
+}
+
 function setNewLinePos() {
   if (gMeme.newLinePos.x > 500) {
     gMeme.newLinePos.x = 10;
@@ -76,6 +83,7 @@ function setNewLinePos() {
   gMeme.newLinePos.x += 100;
   gMeme.newLinePos.y += 10;
 }
+
 function moveLinesUp() {
   gMeme.objects[gMeme.selectedLineIdx].y =
     gMeme.objects[gMeme.selectedLineIdx].y - 10;
@@ -147,6 +155,14 @@ function setStrokeColor(color) {
 
 function setTextColor(color) {
   gMeme.objects[gMeme.selectedLineIdx].color = color;
+}
+
+function toggleDrag() {
+  gMeme.isDrag = !gMeme.isDrag;
+}
+
+function _saveMemesToStorage() {
+  saveToStorage(KEY, gMyMemes);
 }
 
 // function onImgInput(ev) {

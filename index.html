@@ -10,79 +10,94 @@
 </head>
 
 <body onload="onInit()">
+
+    <!-- HEADER -->
     <header class="main-header flex space-between align-center">
         <div class="header-container header-layout flex space-between align-center">
             <div class="logo">Gallery</div>
             <section class="main-nav">
                 <a href="#" onclick="openGallery()" style="text-decoration:none">Gallery</a>
-                <a href="#" style="text-decoration:none">My Memes</a>
+                <a href="#" style="text-decoration:none" onclick="openMyMemes(event)">My Memes</a>
                 <a href="#" style="text-decoration:none">About</a>
             </section>
-            <!-- <button class="btn-menu" onclick="toggleMenu()">☰</button> -->
+            <button class="btn-menu" onclick="toggleMenu()">☰</button>
         </div>
     </header>
+    <div class="main-screen" onclick="toggleMenu()"></div>
 
-    <section class="search-container flex align-center">
-        <input class="search-input" placeholder="search" type="search">
-        <div class="sort flex ">
+    <h2 class="title">WELCOME TO MY MEME GENERATOR</h2>
 
-        </div>
-        <button class="more-btn">More</button>
-    </section>
+
+    <!-- My MEMe Area -->
+    <div class="my-meme-container">
+        <h2>Welcome To Your Memes</h2>
+        <button onclick="openGallery()" class="escape">X</button>
+        <div class="meme-container"></div>
+    </div>
+
 
     <main class="main-layout">
         <div class="grid-container "></div>
     </main>
     <div class="meme-generator-container flex space-between align-center">
-        <header class="header-2 main-header flex space-between align-center">
-            <div class="header-container header-layout flex space-between align-center">
-                <div class="logo">Meme Generator</div>
-                <section class="main-nav">
-                    <a href="#" style="text-decoration:none" onclick="openGallery()">Gallery</a>
-                    <a href="#" style="text-decoration:none">My Memes</a>
-                    <a href="#" style="text-decoration:none">About</a>
-                </section>
-                <!-- <button class="btn-menu" onclick="toggleMenu()">☰</button> -->
-            </div>
-        </header>
+
+        <!-- MEME GENERATOR -->
         <div class="main-meme-editor main-content flex main-layout">
 
-            <section class="canvas-container">
-                <canvas onclick="onSelectObj(event)" width="500" height="500" id="canvas">
-
+            <section class="canvas-container cursor-grabbing">
+                <canvas onmousedown="onMouseDown(event)" onmousemove="onMouseOver(event)" onmouseleave="onMouseLeave()"
+                    onmouseup="onMouseUp()" width="500" height="500" id="canvas">
                 </canvas>
             </section>
+
+
             <section class="meme-editor flex direction-column direction-column  align-center">
                 <input id="text-input" oninput="onDrawText(event,this)" type="text" placeholder="enter text here">
                 <div class="manage-btns">
-                    <button onclick="onMoveLineUp()" class="move-line-up"> <img src="img\up-arrow.png"></button>
-                    <button onclick="onMoveLineDown()" class="move-line-down"><img src="img\down-arrow.png"></button>
+
                     <button class="change-line-btn" onclick="onChooseNxtLine()"><img src="img\arrow.png"></button>
                     <button class="add-btn" onclick="onNewLine()"><img src="img\plus.png"></button>
                     <button class="delete-btn" onclick="onDeletLine()"><img src="img\delete.png"></button>
                 </div>
+
+
                 <div class="editors">
                     <button onclick="setLinesPos(this)" id="left" class="item-1"><img src="img\left.png"></button>
                     <button onclick="setLinesPos(this)" id="center" class="item-2"><img src="img\center.png"></button>
                     <button onclick="setLinesPos(this)" id="right" class="item-3"><img src="img\right.png"></button>
-                    <button type="color" class="item-4"><img src="img\color.png"></button>
-                    <button class="item-5"><img src="img\S.png"></button>
-                    <input oninput="onSetStrokeClr(this.value)" type="color" id="favcolor" name="favcolor"
-                        value="#ff0000">
-                    <input oninput="onSetTextColor(this.value)" type="color" value="#ff0000">
-                    <input class="item-6" id="text-size" onchange="onSetSize(this.value)" min="0" max="100"
-                        type="number">
-                    <select onchange="onSetFont(this.value)" class="font-input item-7">
-                        <option>Impact</option>
-                        <option>Cursive</option>
-                        <option>Arial</option>
-                    </select>
+                    <div class="color-container">
+                        <button type="color" onclick="textcolor.click()" class="item-4"><img
+                                src="img\color.png"></button>
+                        <input oninput="onSetTextColor(this.value)" id="textcolor" type="color" value="#ff0000">
+                    </div>
 
+                    <div class="color-container">
+                        <button onclick="favcolor.click()" class="item-5"><img src="img\S.png"></button>
+                        <input oninput="onSetStrokeClr(this.value)" type="color" id="favcolor" name="favcolor"
+                            value="#ff0000">
+                    </div>
+
+
+                    <div class="">
+                        <input class="item-6" id="text-size" onchange="onSetSize(this.value)" min="0" max="100"
+                            type="number">
+                        <select onchange="onSetFont(this.value)" class="font-input ">
+                            <option>Impact</option>
+                            <option>Cursive</option>
+                            <option>Arial</option>
+                        </select>
+                    </div>
+                    <button onclick="onMoveLineUp()" class="move-line-up item-8"> <img src="img\up-arrow.png"></button>
+                    <button onclick="onMoveLineDown()" class="move-line-down item-9"><img
+                            src="img\down-arrow.png"></button>
 
                 </div>
                 <div class="stickers-container flex">
                     <input onclick="onAddSticker(this)" type="image" id="img\cigarrete.png" src="img\cigarrete.png">
                     <input onclick="onAddSticker(this)" type="image" id="img\sun-glasses.png" src="img\sun-glasses.png">
+                    <input onclick="onAddSticker(this)" type="image" id="img\hamburger.png" src="img\hamburger.png">
+                    <input onclick="onAddSticker(this)" type="image" id="img\drink.png" src="img\drink.png">
+                    <input onclick="onAddSticker(this)" type="image" id="img\king.png" src="img\king.png">
                 </div>
                 <div class="download-upload flex  clean-list">
                     <div class="download-btn flex align-center">
@@ -92,12 +107,16 @@
                     <div class="upload-btn align-center flex">
                         <a href="#" style="text-decoration:none" onclick="uploadImg()">Upload Img</a>
                     </div>
+                    <div class="save-btn align-center flex">
+                        <a href="#" style="text-decoration:none" onclick="onSaveMeme()">Save Meme</a>
+                    </div>
                 </div>
             </section>
         </div>
 
     </div>
 
+    <script src="js/local-service.js"></script>
     <script src="js/util.js"></script>
     <script src="js/gallery-service.js"></script>
     <script src="js/meme-service.js"></script>

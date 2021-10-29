@@ -1,11 +1,16 @@
+canvas.addEventListener("wheel", onWheel);
+
 function onDrawText() {
   var txt = document.querySelector("#text-input").value;
   setCurrText(txt);
   onUpdateCanvas();
 }
-
+function onWheel(ev) {
+  if (ev.deltaY > 0) onSetSize(gMeme.objects[gMeme.selectedLineIdx].size + 10);
+  else onSetSize(gMeme.objects[gMeme.selectedLineIdx].size - 10);
+  onUpdateCanvas();
+}
 function onUpdateCanvas() {
-  console.log(gMeme);
   drawBaseImg(gMeme.url.url);
   onDrawObjects();
 }
@@ -95,8 +100,8 @@ function updateTextSizeValue() {
 function onDeletLine() {
   var elInput = document.querySelector("#text-input");
   elInput.value = "";
-  gMeme.objects[gMeme.selectedLineIdx].txt = "";
-  // gMeme.objects.splice(gMeme.selectedLineIdx, 1);
+  // gMeme.objects[gMeme.selectedLineIdx].txt = "";
+  gMeme.objects.splice(gMeme.selectedLineIdx, 1);
   onUpdateCanvas();
 }
 
@@ -131,6 +136,32 @@ function onSetFont(font) {
 function onAddSticker(elSticker) {
   let src = elSticker.id;
   addNewSticker(src);
-  console.log(gMeme);
   onUpdateCanvas();
+}
+
+function onMouseUp() {
+  document.querySelector("#canvas").style.cursor = "grab";
+  toggleDrag();
+}
+
+function onMouseDown(ev) {
+  document.querySelector("#canvas").style.cursor = "grabbing";
+  onSelectObj(ev);
+  toggleDrag();
+}
+function onMouseLeave() {
+  if (gMeme.isDrag) toggleDrag();
+}
+
+function onMouseOver(ev) {
+  let { offsetX, offsetY } = ev;
+  // console.log(offsetX, offsetY);
+  if (gMeme.isDrag) {
+    setObjPos(offsetX, offsetY);
+    onUpdateCanvas();
+  }
+}
+
+function onSaveMeme() {
+  saveMeme();
 }

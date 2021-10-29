@@ -14,18 +14,23 @@ function drawText(text, isSelected) {
   gCtx.font = text.size + `px ${gFont}`;
   gCtx.fillText(text.txt, text.x, text.y);
   gCtx.strokeText(text.txt, text.x, text.y);
-  if (isSelected) drawRect(text.x, text.y);
+  if (isSelected) drawRect(text.x, text.y, text.size, true);
 }
 
 function drawSticker(object, isSelected) {
-  let size = document.querySelector("#text-size").value;
   let url = object.src;
   let sticker = new Image();
   sticker.src = url;
   sticker.onload = function () {
-    gCtx.drawImage(sticker, 100, 190, size, size);
+    gCtx.drawImage(
+      sticker,
+      object.x,
+      object.y,
+      object.size * 2,
+      object.size * 2
+    );
   };
-  if (isSelected) drawRect(object.x - 70, object.y + 20);
+  if (isSelected) drawRect(object.x, object.y, object.size);
 }
 
 function setFont(font) {
@@ -41,7 +46,6 @@ function getPos(ev) {
 }
 
 function drawBaseImg(url) {
-  console.log(url);
   let base_image = new Image();
   base_image.src = url;
   base_image.onload = function () {
@@ -49,9 +53,20 @@ function drawBaseImg(url) {
   };
 }
 
-function drawRect(x, y) {
+function drawRect(x, y, size, isRect) {
+  let hOffset = 0;
+  let wOffset = 0;
+  if (isRect) {
+    hOffset = 100;
+    wOffset = 200;
+  }
   gCtx.beginPath();
-  gCtx.rect(x - 10, y - 40, 280, 50);
+  gCtx.rect(x - size, y - size, size * 4 + wOffset, size * 4.2 - hOffset);
   gCtx.strokeStyle = "white";
   gCtx.stroke();
+}
+
+function getImgUrl() {
+  var imgContent = gElCanvas.toDataURL("image/jpeg");
+  return imgContent;
 }
