@@ -100,7 +100,6 @@ function updateTextSizeValue() {
 function onDeletLine() {
   var elInput = document.querySelector("#text-input");
   elInput.value = "";
-  // gMeme.objects[gMeme.selectedLineIdx].txt = "";
   gMeme.objects.splice(gMeme.selectedLineIdx, 1);
   onUpdateCanvas();
 }
@@ -111,7 +110,6 @@ function onUpdateUi() {
 }
 
 function onSelectObj(ev) {
-  console.log(gMeme.objects[gMeme.selectedLineIdx]);
   let offsetX = ev.offsetX;
   let offsetY = ev.offsetY;
   findObjRange(offsetX, offsetY);
@@ -140,14 +138,14 @@ function onAddSticker(elSticker) {
 }
 
 function onMouseUp() {
-  document.querySelector("#canvas").style.cursor = "grab";
   toggleDrag();
+  document.querySelector("#canvas").style.cursor = "grab";
 }
 
 function onMouseDown(ev) {
+  toggleDrag();
   document.querySelector("#canvas").style.cursor = "grabbing";
   onSelectObj(ev);
-  toggleDrag();
 }
 function onMouseLeave() {
   if (gMeme.isDrag) toggleDrag();
@@ -164,4 +162,36 @@ function onMouseOver(ev) {
 
 function onSaveMeme() {
   saveMeme();
+}
+
+function uploadImg() {
+  const imgDataUrl = gElCanvas.toDataURL("image/jpeg");
+
+  // A function to be called if request succeeds
+  function onSuccess(uploadedImgUrl) {
+    const encodedUploadedImgUrl = encodeURIComponent(uploadedImgUrl);
+    document.querySelector(".share-container").innerHTML = `
+      <a href="https://www.facebook.com/sharer/sharer.php?u=${encodedUploadedImgUrl}&t=${encodedUploadedImgUrl}" title="Share on Facebook" style="text-decoration:none" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}'); return false;">
+         Share   
+      </a>`;
+  }
+  doUploadImg(imgDataUrl, onSuccess);
+}
+
+function doUploadImg(imgDataUrl, onSuccess) {
+  const formData = new FormData();
+  formData.append("img", imgDataUrl);
+
+  fetch("//ca-upload.com/here/upload.php", {
+    method: "POST",
+    body: formData,
+  })
+    .then(res => res.text())
+    .then(url => {
+      console.log("Got back live url:", url);
+      onSuccess(url);
+    })
+    .catch(err => {
+      console.error(err);
+    });
 }
