@@ -707,7 +707,8 @@ opacity: .15;
 
 .line{
 position:absolute;
-height:100%; width:1px;
+height:100%;
+ width:1px;
 opacity:0.1;
 background-color:#000;
 }
@@ -721,13 +722,13 @@ background-color:#000;
 }
 
 .about-title {
-padding: .3em 1em .25em;    
+/* padding: .3em 1em .25em;     */
 font-weight: 400;
 font-size: 60px;
 color: white;
 font-family: 'Bellefair', serif;
 position:relative;
-line-height:1.3;
+line-height:1;
 text-align: center;
 
 }
