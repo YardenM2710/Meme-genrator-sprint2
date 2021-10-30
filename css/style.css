@@ -712,7 +712,9 @@ opacity:0.1;
 background-color:#000;
 }
 
-.titleCont{position:relative;
+.titleCont{
+    position:relative;
+    margin-top: 50px;
     width: 70vw;
     text-align: center;
   
