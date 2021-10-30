@@ -18,15 +18,12 @@
             <section class="main-nav">
                 <a href="#" onclick="openGallery()" style="text-decoration:none">Gallery</a>
                 <a href="#" style="text-decoration:none" onclick="openMyMemes(event)">My Memes</a>
-                <a href="#" style="text-decoration:none">About</a>
+                <a onclick="openAbout('About')" href="#" style="text-decoration:none">About</a>
             </section>
+            <div class="main-screen" onclick="toggleMenu()"></div>
             <button class="btn-menu" onclick="toggleMenu()">☰</button>
         </div>
     </header>
-    <div class="main-screen" onclick="toggleMenu()"></div>
-
-    <h2 class="title">WELCOME TO MY MEME GENERATOR</h2>
-
 
     <!-- My MEMe Area -->
     <div class="my-meme-container">
@@ -35,8 +32,28 @@
         <div class="meme-container"></div>
     </div>
 
+    <!-- ABOUT -->
+    <div class="about">
+        <main role="main" class="about-content" id="about-content">
+            <div class="titleCont css-typing ">
+                <h1 class="about-title" id="about-title">"One picture...</h1>
+                <h1 class="about-title" id="about-title">Worth a thousand words.</h1>
+                <h1 class="about-title" id="about-title"> One Meme...</h1>
+                <h1 class="about-title" id="about-title"> Worth A Weekend of coding" </h1>
+                <h1 class="about-title" id="about-title"> Yarden Mathieson</h1>
+            </div>
+            <canvas id="noise" class="noise"></canvas>
+            <div class="vignette"></div>
+            <img class="fade-in" src="img\chinese-man.png">
+        </main>
+    </div>
 
+    <!-- GALLRY -->
     <main class="main-layout">
+        <section class="search-container">
+            <input oninput="onGetSortedImgs(this.value)" placeholder="Search" class="search-input" type="text">
+            <div class="key-words-container flex"></div>
+        </section>
         <div class="grid-container "></div>
     </main>
     <div class="meme-generator-container flex space-between align-center">
@@ -52,7 +69,7 @@
 
 
             <section class="meme-editor flex direction-column direction-column  align-center">
-                <input id="text-input" oninput="onDrawText(event,this)" type="text" placeholder="enter text here">
+                <input id="text-input" oninput="onDrawText(event,this)" type="text" placeholder="Enter text here">
                 <div class="manage-btns">
 
                     <button class="change-line-btn" onclick="onChooseNxtLine()"><img src="img\arrow.png"></button>
@@ -81,7 +98,7 @@
                     <div class="">
                         <input class="item-6" id="text-size" onchange="onSetSize(this.value)" min="0" max="100"
                             type="number">
-                        <select onchange="onSetFont(this.value)" class="font-input ">
+                        <select onchange="onSetFont(this.value)" class="font-input item-10">
                             <option>Impact</option>
                             <option>Cursive</option>
                             <option>Arial</option>
@@ -93,32 +110,29 @@
 
                 </div>
                 <div class="stickers-container flex">
-                    <input onclick="onAddSticker(this)" type="image" id="img\cigarrete.png" src="img\cigarrete.png">
+                    <input onclick="onAddSticker(this)" type="image" id="img\beard.png" src="img\beard.png">
                     <input onclick="onAddSticker(this)" type="image" id="img\sun-glasses.png" src="img\sun-glasses.png">
-                    <input onclick="onAddSticker(this)" type="image" id="img\hamburger.png" src="img\hamburger.png">
+                    <input onclick="onAddSticker(this)" type="image" id="img\thug-life.png" src="img\thug-life.png">
                     <input onclick="onAddSticker(this)" type="image" id="img\drink.png" src="img\drink.png">
-                    <input onclick="onAddSticker(this)" type="image" id="img\king.png" src="img\king.png">
+                    <input onclick="onAddSticker(this)" type="image" id="img\hat.png" src="img\hat.png">
                 </div>
                 <div class="download-upload flex  clean-list">
                     <div class="download-btn flex align-center">
                         <a href="#" onclick="downloadImg(this)" style="text-decoration:none"
-                            download="my-img.jpg">Download Img</a>
+                            download="my-img.jpg">Download</a>
                     </div>
                     <div class="upload-btn align-center flex">
                         <a href="#" style="text-decoration:none" onclick="uploadImg()">Upload Img</a>
                     </div>
-                    <div class="share-container"></div>
                     <div class="save-btn align-center flex">
                         <a href="#" style="text-decoration:none" onclick="onSaveMeme()">Save Meme</a>
                     </div>
                 </div>
             </section>
         </div>
-
     </div>
 
     <script src="js/local-service.js"></script>
-    <script src="js/util.js"></script>
     <script src="js/gallery-service.js"></script>
     <script src="js/meme-service.js"></script>
     <script src="js/meme-controller.js"></script>

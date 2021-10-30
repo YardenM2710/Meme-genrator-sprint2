@@ -41,7 +41,6 @@ function getPos(ev) {
   let offsetX = ev.offsetX;
   let offsetY = ev.offsetY;
   let pos = { offsetX, offsetY };
-  console.log(pos);
   gPos = pos;
 }
 

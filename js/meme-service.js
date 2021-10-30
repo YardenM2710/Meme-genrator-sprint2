@@ -114,15 +114,11 @@ function getimgById(imgId) {
 }
 
 function downloadImg(elLink) {
-  console.log(elLink, gElCanvas);
   var imgContent = gElCanvas.toDataURL("image/jpeg");
   elLink.href = imgContent;
 }
 
 function setCurrText(txt) {
-  gMeme.objects[gMeme.selectedLineIdx].txt = txt;
-}
-function setCurrSticker(img) {
   gMeme.objects[gMeme.selectedLineIdx].txt = txt;
 }
 
@@ -164,20 +160,3 @@ function toggleDrag() {
 function _saveMemesToStorage() {
   saveToStorage(KEY, gMyMemes);
 }
-
-// function onImgInput(ev) {
-//   loadImageFromInput(ev, renderImg);
-// }
-
-// function loadImageFromInput(ev, onImageReady) {
-//   document.querySelector(".share-container").innerHTML = "";
-//   var reader = new FileReader();
-
-//   reader.onload = function (event) {
-//     var img = new Image();
-//     img.onload = onImageReady.bind(null, img);
-//     img.src = event.target.result;
-//     gImg = img;
-//   };
-//   reader.readAsDataURL(ev.target.files[0]);
-// }

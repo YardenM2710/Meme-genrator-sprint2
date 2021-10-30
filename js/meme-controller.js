@@ -6,6 +6,7 @@ function onDrawText() {
   onUpdateCanvas();
 }
 function onWheel(ev) {
+  ev.preventDefault();
   if (ev.deltaY > 0) onSetSize(gMeme.objects[gMeme.selectedLineIdx].size + 10);
   else onSetSize(gMeme.objects[gMeme.selectedLineIdx].size - 10);
   onUpdateCanvas();
@@ -32,7 +33,6 @@ function onDrawObjects() {
 }
 
 function onSetCurrMeme(id) {
-  console.log("id:", id);
   createGMeme(id, "Enter Text Here");
   onUpdateUi();
   onUpdateCanvas();
@@ -84,7 +84,6 @@ function onChooseNxtLine() {
 }
 
 function onSelectLine() {
-  console.log("hey");
   setSelectedLine(idx);
 }
 
@@ -147,15 +146,22 @@ function onMouseDown(ev) {
   document.querySelector("#canvas").style.cursor = "grabbing";
   onSelectObj(ev);
 }
+
 function onMouseLeave() {
   if (gMeme.isDrag) toggleDrag();
 }
 
 function onMouseOver(ev) {
+  let x = 40;
+  let y = 30;
+  if (gMeme.objects[gMeme.selectedLineIdx].type === "text") {
+    x = 100;
+    y = 0;
+  }
   let { offsetX, offsetY } = ev;
-  // console.log(offsetX, offsetY);
   if (gMeme.isDrag) {
-    setObjPos(offsetX, offsetY);
+    document.querySelector("#canvas").style.cursor = "grabbing";
+    setObjPos(offsetX - x, offsetY - y);
     onUpdateCanvas();
   }
 }
@@ -167,13 +173,12 @@ function onSaveMeme() {
 function uploadImg() {
   const imgDataUrl = gElCanvas.toDataURL("image/jpeg");
 
-  // A function to be called if request succeeds
   function onSuccess(uploadedImgUrl) {
     const encodedUploadedImgUrl = encodeURIComponent(uploadedImgUrl);
-    document.querySelector(".share-container").innerHTML = `
-      <a href="https://www.facebook.com/sharer/sharer.php?u=${encodedUploadedImgUrl}&t=${encodedUploadedImgUrl}" title="Share on Facebook" style="text-decoration:none" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}'); return false;">
-         Share   
-      </a>`;
+    window.open(
+      `https://www.facebook.com/sharer/sharer.php?u=${encodedUploadedImgUrl}&t=${encodedUploadedImgUrl}`,
+      "_blank"
+    );
   }
   doUploadImg(imgDataUrl, onSuccess);
 }
@@ -188,7 +193,6 @@ function doUploadImg(imgDataUrl, onSuccess) {
   })
     .then(res => res.text())
     .then(url => {
-      console.log("Got back live url:", url);
       onSuccess(url);
     })
     .catch(err => {
