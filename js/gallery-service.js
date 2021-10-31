@@ -1,8 +1,8 @@
 var gImgs = [];
-var gKeyWords;
-var gSortedImgs = [];
-
 createImgs();
+const KEYWORDS = "keywords";
+var gKeyWordsMap = loadFromStorage(KEYWORDS) || getKeyWordsMap();
+var gSortedImgs = [];
 
 function createImgs() {
   createImg(1, "img/1.jpg", "happy");
@@ -36,7 +36,13 @@ function getKeyWordsMap() {
     acc[vote]++;
     return acc;
   }, {});
-  gKeyWords = keyWordsMap;
+  return keyWordsMap;
+}
+
+function setKeywordsSize(keyword) {
+  let textVal = keyword.innerText;
+  gKeyWordsMap[textVal]++;
+  _saveKeywordsToStorage();
 }
 
 function createImg(id, url, keywords) {
@@ -53,4 +59,20 @@ function getSortedImgs(val) {
 
 function setHeader(str) {
   document.querySelector(".logo").innerText = str;
+}
+
+function _saveKeywordsToStorage() {
+  saveToStorage(KEYWORDS, gKeyWordsMap);
+}
+
+function getKeyWordSize(keyword) {
+  let className = keyword;
+  if (gKeyWordsMap[keyword] < 2) className += "keyword-1";
+  if (gKeyWordsMap[keyword] < 5) className += "keyword-2";
+  if (gKeyWordsMap[keyword] < 8) className += "keyword-3";
+  if (gKeyWordsMap[keyword] < 10) className += "keyword-4";
+  if (gKeyWordsMap[keyword] < 12) className += "keyword-5";
+  if (gKeyWordsMap[keyword] < 14) className += "keyword-6";
+  if (gKeyWordsMap[keyword] >= 14) className += "keyword-7";
+  return className;
 }

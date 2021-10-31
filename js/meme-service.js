@@ -33,7 +33,6 @@ function saveMeme() {
 }
 
 // LINE AREA
-
 function setSelectedLine(idx) {
   if (!idx) {
     if (gMeme.selectedLineIdx === gMeme.objects.length - 1) {
@@ -58,6 +57,7 @@ function addNewLine() {
   });
   setNewLinePos();
 }
+
 function addNewSticker(src) {
   gMeme.objects.push({
     type: "img",
@@ -93,7 +93,7 @@ function moveLineDown() {
     gMeme.objects[gMeme.selectedLineIdx].y + 10;
 }
 
-function tocenterLine() {
+function toCenterLine() {
   gMeme.objects[gMeme.selectedLineIdx].x = 150;
   onUpdateCanvas();
 }
@@ -104,13 +104,6 @@ function toLeftLine() {
 function toRightLine() {
   gMeme.objects[gMeme.selectedLineIdx].x = 300;
   onUpdateCanvas();
-}
-
-function getimgById(imgId) {
-  var image = gImgs.find(img => {
-    return +imgId === img.id;
-  });
-  return image;
 }
 
 function downloadImg(elLink) {

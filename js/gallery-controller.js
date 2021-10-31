@@ -1,7 +1,6 @@
 function onInit() {
   renderGallery();
   setCanvas();
-  getKeyWordsMap();
   renderKeyWords();
 }
 
@@ -22,10 +21,23 @@ function openGallery() {
 
 function renderKeyWords() {
   let strHtml = "";
-  for (const property in gKeyWords) {
-    strHtml += `<h3 onclick=" onGetSortedImgs(this.innerText)">${property}</h3>`;
+  for (const property in gKeyWordsMap) {
+    strHtml += `<h3 class="${getKeyWordSize(
+      property
+    )}"  onclick=" onGetSortedImgs(this.innerText), onSetKeywordSize(this)">${property}</h3>`;
   }
   document.querySelector(".key-words-container").innerHTML = strHtml;
+  for (const property in gKeyWordsMap) {
+    let size = 0;
+    if (gKeyWordsMap[property] >= 3) {
+      size = gKeyWordsMap[property] * 1.5 + "px";
+    } else {
+      size = 24 + "px";
+    }
+    let keyWordclass = getKeyWordSize(property);
+    let fontSize = document.querySelector(`.${keyWordclass}`);
+    fontSize.style.fontSize = size;
+  }
 }
 
 function renderGallery() {
@@ -85,4 +97,12 @@ function openAbout(str) {
     "hidden";
 
   setHeader(str);
+}
+
+function onSetKeywordSize(keyword) {
+  setKeywordsSize(keyword);
+  keyword.style.fontSize =
+    gKeyWordsMap[keyword.innerText] >= 2
+      ? gKeyWordsMap[keyword.innerText] + 24 + "px"
+      : 24 + "px";
 }

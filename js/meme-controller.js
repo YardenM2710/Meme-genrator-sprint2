@@ -53,7 +53,7 @@ function setLinesPos(elBtn) {
       toRightLine();
       break;
     case "center":
-      tocenterLine();
+      toCenterLine();
       break;
     case "left":
       toLeftLine();
@@ -83,10 +83,6 @@ function onChooseNxtLine() {
   onUpdateCanvas();
 }
 
-function onSelectLine() {
-  setSelectedLine(idx);
-}
-
 function onSetSize(size) {
   setCurrTextSize(size);
   onUpdateCanvas();
@@ -109,9 +105,7 @@ function onUpdateUi() {
 }
 
 function onSelectObj(ev) {
-  let offsetX = ev.offsetX;
-  let offsetY = ev.offsetY;
-  findObjRange(offsetX, offsetY);
+  findObjRange(ev.offsetX, ev.offsetY);
   onUpdateCanvas();
   onUpdateUi();
 }
@@ -153,7 +147,7 @@ function onMouseLeave() {
 
 function onMouseOver(ev) {
   let x = 40;
-  let y = 30;
+  let y = 40;
   if (gMeme.objects[gMeme.selectedLineIdx].type === "text") {
     x = 100;
     y = 0;
@@ -168,6 +162,7 @@ function onMouseOver(ev) {
 
 function onSaveMeme() {
   saveMeme();
+  openGallery();
 }
 
 function uploadImg() {
